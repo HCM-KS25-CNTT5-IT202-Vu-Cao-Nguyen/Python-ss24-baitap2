@@ -1,0 +1,36 @@
+khi points là public, bất kì ai cũng có thể thay đổi trực tiếp giá trị của nó:
+- Hệ quả:
++ Dữ liệu trong hệ thống không còn đảm bảo tính đúng đắn
++ Điểm tích lũy có thể trở thành số âm, điều này trái với quy tắc nghiệp vụ
++ Nếu gán chuỗi hoặc kiểu dữ liệu khác, các phép toán sẽ bị lỗi
+
+
+Sau khi đổi từ points thành __points ta cần phải sử dụng Decorator là @property để đọc dữ liệu và points.setter để kiểm tra dữ liệu trước khi cho phép gán
+
+Truyền self vào is_eligible_for_voucher là dư thừa bởi vì Hàm def is_eligible_for_voucher(self, bill_amount): không hề sử dụng đến self.customer_name
+hoặc là self.points
+nó chỉ kiểm tra bill_amount >= 200000
+
+
+Cần dùng:
+
+@staticmethod
+
+Ví dụ:
+
+@staticmethod
+def is_eligible_for_voucher(bill_amount):
+    return bill_amount >= 200000
+
+Có thể gọi:
+
+MemberCard.is_eligible_for_voucher(250000)
+
+không cần tạo object.
+
+So sánh
+@staticmethod	@classmethod
+Không có self	Có cls
+Không truy cập object	Truy cập class
+Không truy cập thuộc tính class	Có thể truy cập biến class
+Dùng cho hàm tiện ích	Dùng khi cần thao tác với class
